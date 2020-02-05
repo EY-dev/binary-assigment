@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Binary Worksheet Turn In</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+
+<div id="app" class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="jumbotron">
+                <h1 class="display-4">Hello!</h1>
+                <p class="lead">This is the binary Worksheet assigment for CIS120 Class of Chemeketa Community College</p>
+                <hr class="my-4">
+                <p>Author: Evgenii Eugene Esaulov</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    Binary to decimal
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="row" v-for="(number, index) in binaryNumbers1" v-bind:id="index">
+                                <div class="col-sm-12">
+                                    {{print(index+1,number)}}<b>{{getDecimal(number.split(' ').join(''))}}</b>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="row" v-for="(number, index) in binaryNumbers2" v-bind:id="index">
+                                <div class="col-sm-12">
+                                    {{print(index + binaryNumbers1.length + 1, number)}}<b>{{getDecimal(number.split(' ').join(''))}}</b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <form>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input type="number" class="form-control" placeholder="Input binary number" v-model="newBinary">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-success mb-2" v-on:click="addBinary(newBinary)">Add binary</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 30px">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    Decimal to Binary
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="row" v-for="(number, index) in decimalNumbers1" v-bind:id="index">
+                                <div class="col-sm-12">
+                                    {{print(index+1,number)}}<b>{{getBinary(number)}}</b>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="row" v-for="(number, index) in decimalNumbers2" v-bind:id="index">
+                                <div class="col-sm-12">
+                                    {{print(index + decimalNumbers1.length + 1, number)}}<b>{{getBinary(number)}}</b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <form>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input type="number" class="form-control" placeholder="Input decimal number" v-model="newDecimal">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-success mb-2" v-on:click="addDecimal(newDecimal)">Add Decimal</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 30px">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    Words to Binary
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="row" v-for="(number, index) in wordsNumbers1" v-bind:id="index">
+                                <div class="col-sm-12">
+                                    {{print(index+1,number)}}<b>{{wordsToBinary(number)}}</b>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="row" v-for="(number, index) in wordsNumbers2" v-bind:id="index">
+                                <div class="col-sm-12">
+                                    {{print(index + wordsNumbers1.length + 1, number)}}<b>{{wordsToBinary(number)}}</b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <form>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Input string" v-model="newString">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-success mb-2" v-on:click="addString(newString)">Add String</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+    const app = new Vue({
+        el:'#app',
+        data:{
+            binaryNumbers1:['1011','0101','1001', '1011 1101', '0001 0010 0010 1001'],
+            binaryNumbers2:['1101','1010', '1101 1011', '1010 1010', '1101 0100 0011 0001'],
+            decimalNumbers1:[14,36,132,211,30295],
+            decimalNumbers2:[17,52,196,244,54553],
+            wordsNumbers1:['BAG','CHEMEKETA'],
+            wordsNumbers2:['BIRD'],
+            newBinary:'',newString:'',
+            newDecimal:0,
+        },
+    methods: {
+        print(index,number){
+            return index + ':   ' + number + ' - ';
+        },
+        getDecimal(number){
+            let total = 0;
+            for(let i = number.length - 1; i > -1; i--){
+                total += parseInt(number[i])*Math.pow(2, number.length - i - 1);
+            }
+            return total;
+        },
+        addBinary(number){
+            if (this.binaryNumbers2.length === this.binaryNumbers1.length){
+                this.binaryNumbers1.push(number)
+            }
+            else{this.binaryNumbers2.push(number)}
+            this.newBinary='';
+        },
+        getBinary(number){
+            let total='';
+            while (number > 0){
+                total = (number % 2) + total;
+                number = Math.floor(number / 2);
+            }
+            return total;
+        },
+        addDecimal(number){
+            if (this.decimalNumbers2.length === this.decimalNumbers1.length){
+                this.decimalNumbers1.push(parseInt(number))
+            }
+            else{this.decimalNumbers2.push(parseInt(number))}
+            this.newDecimal=0;
+        },
+        wordsToBinary(str){
+            let total = '';
+            let binary='';
+            for(let i = 0; i< str.length; i++){
+                binary = this.getBinary(parseInt(str.charCodeAt(i)));
+                total = total + '0' + binary + ' ';
+            }
+            return total;
+        },
+        addString(number){
+            if (this.wordsNumbers2.length === this.wordsNumbers1.length){
+                this.wordsNumbers1.push(number.toUpperCase())
+            }
+            else{this.wordsNumbers2.push(number.toUpperCase())}
+            this.newString='';
+        },
+    },
+    mounted: function () {
+    },
+    updated: function () {},
+    created: function () {},
+    });
+</script>
+</body>
+</html>
